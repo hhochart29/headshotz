@@ -1,0 +1,3 @@
+[submodule "server"]
+	path = server
+	url = git@github.com:hhochart29/headshotz-server.git
