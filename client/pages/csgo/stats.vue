@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- {{ JSON.stringify(stats) }} -->
+    stats
   </div>
 </template>
 
