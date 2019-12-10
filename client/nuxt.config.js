@@ -26,7 +26,7 @@ export default {
   },
 
   env: {
-    trackerGG: process.env.TRACKER_GG_API
+    API_URL: process.env.API_URL
   },
   /*
    ** Customize the progress-bar color

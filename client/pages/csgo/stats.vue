@@ -22,16 +22,12 @@ export default {
   },
 
   async created() {
-    const stats = await fetch(
-      `https://public-api.tracker.gg/v2/csgo/standard/profile/steam/${this.profile.steamid}`,
-      {
-        method: 'GET',
-        headers: {
-          'TRN-Api-Key': process.env.trackerGG
-        }
-      }
+    const res = await fetch(
+      `https://steam-auth.herokuapp.com/csgo/stats/${this.profile.steamid}`,
+      { credentials: 'include' }
     )
-    console.log(stats)
+    const stats = await res.json()
+    console.log('Stats for user ', this.profile.personaname, ' : ', stats)
   }
 }
 </script>

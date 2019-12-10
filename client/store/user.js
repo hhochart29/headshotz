@@ -16,16 +16,16 @@ export const actions = {
   async getSession({ commit }) {
     try {
       const request = await fetch(
-        'https://steam-auth.herokuapp.com/steam/session',
+        'https://steam-auth.herokuapp.com/auth/steam/session',
         {
           credentials: 'include'
         }
       )
 
-      const { req } = await request.json()
-      if (req && req.user) commit('setUserProfile', req.user)
+      const { session } = await request.json()
+      if (session && session.user) commit('setUserProfile', session.user)
 
-      return req && req.user
+      return session && session.user
     } catch (e) {
       console.error('Error while getting session : ', e)
     }
