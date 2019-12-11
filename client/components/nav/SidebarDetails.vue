@@ -1,10 +1,13 @@
 <template>
   <div
-    class="sidebar-details h-full ml-16 py-16 px-10 z-0 rounded-r-xl text-white w-128 shadow bg-black-100 bg-no-repeat bg-cover bg-center"
+    class="sidebar-details h-full ml-16 py-16 px-10 z-0 rounded-r-xl text-white w-128 shadow bg-black-100 bg-no-repeat bg-cover bg-center relative"
     :class="{ closed: !sidebarIsOpen }"
-    :style="{ backgroundImage: `url(${menuHeader})` }"
   >
-    <div class="absolute h-full right-0 top-0 flex items-center w-8 p-2">
+    <img
+      :src="menuHeader"
+      class="menu-header absolute object-cover h-full top-0 left-0 w-full rounded-r-xl"
+    />
+    <div class="absolute h-full right-0 top-0 flex items-center w-8 p-2 z-10">
       <span
         class="arrow-toggle relative cursor-pointer w-8 h-8"
         :class="{ inverted: !sidebarIsOpen }"
@@ -21,7 +24,7 @@
       </span>
     </div>
 
-    <div class="sidebar-content">
+    <div class="sidebar-content relative">
       <div v-if="userProfile" class="flex wrap justify-between items-center">
         <div class="flex items-center px-2 py-2 flex-grow-0">
           <img
@@ -157,6 +160,10 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+.menu-header {
+  filter: opacity(0.1);
+}
+
 .active-menu {
   transition: transform 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   background: theme('colors.white');
@@ -178,21 +185,31 @@ export default {
 .sidebar-details {
   transition: transform 600ms ease-in-out, width 600ms ease-in-out,
     padding-left 600ms ease-in-out;
-  transition-delay: 100ms;
-  background-blend-mode: luminosity;
   background-color: theme('colors.black.100');
 
+  & > .menu-header {
+    opacity: 1;
+    transition: opacity 600ms;
+    transition-delay: 600ms;
+  }
+
   & > .sidebar-content {
-    transition: opacity 300ms ease-in-out;
+    transition: opacity 600ms ease-in-out;
     transition-delay: 600ms;
   }
   &.closed {
     transform: translateX(calc(-100% + theme(spacing.10)));
     width: 0px;
     padding-left: 0px;
-    transition-delay: 0s;
+    transition-delay: 600ms;
+
+    & > .menu-header {
+      opacity: 0;
+      transition-delay: 0ms;
+    }
+
     & > .sidebar-content {
-      transition-delay: 0s;
+      transition-delay: 0ms;
       opacity: 0;
     }
   }
