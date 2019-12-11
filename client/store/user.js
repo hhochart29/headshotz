@@ -15,12 +15,9 @@ export const mutations = {
 export const actions = {
   async getSession({ commit }) {
     try {
-      const request = await fetch(
-        'https://steam-auth.herokuapp.com/auth/steam/session',
-        {
-          credentials: 'include'
-        }
-      )
+      const request = await fetch(`${process.env.API_URL}/auth/steam/session`, {
+        credentials: 'include'
+      })
 
       const { session } = await request.json()
       if (session && session.user) commit('setUserProfile', session.user)

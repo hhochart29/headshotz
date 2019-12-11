@@ -1,5 +1,5 @@
 <template>
-  <a href="https://steam-auth.herokuapp.com/auth/steam/login">
+  <a :href="loginURL">
     <span>
       Login with steam
     </span>
@@ -11,5 +11,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    loginURL() {
+      return `${process.env.API_URL}/auth/steam/login`
+    }
+  }
+}
 </script>

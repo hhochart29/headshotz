@@ -23,7 +23,7 @@ export default {
 
   async created() {
     const res = await fetch(
-      `https://steam-auth.herokuapp.com/csgo/stats/${this.profile.steamid}`,
+      `${process.env.API_URL}/csgo/stats/${this.profile.steamid}`,
       { credentials: 'include' }
     )
     const stats = await res.json()
