@@ -3,10 +3,13 @@
     class="sidebar-details h-full ml-16 py-16 px-10 z-0 rounded-r-xl text-white w-128 shadow bg-black-100 bg-no-repeat bg-cover bg-center relative"
     :class="{ closed: !sidebarIsOpen }"
   >
-    <img
-      :src="menuHeader"
-      class="menu-header absolute object-cover h-full top-0 left-0 w-full rounded-r-xl"
-    />
+    <transition name="fade" appear mode="out-in">
+      <img
+        v-if="menuHeader"
+        :src="menuHeader"
+        class="menu-header absolute object-cover h-full top-0 left-0 w-full rounded-r-xl"
+      />
+    </transition>
     <div class="absolute h-full right-0 top-0 flex items-center w-8 p-2 z-10">
       <span
         class="arrow-toggle relative cursor-pointer w-8 h-8"
@@ -160,10 +163,6 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.menu-header {
-  filter: opacity(0.1);
-}
-
 .active-menu {
   transition: transform 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   background: theme('colors.white');
@@ -189,8 +188,19 @@ export default {
 
   & > .menu-header {
     opacity: 1;
+    filter: opacity(0.1);
     transition: opacity 600ms;
     transition-delay: 600ms;
+
+    &.fade-enter-active,
+    &.fade-leave-active {
+      transition: 600ms ease-in-out opacity;
+      transition-delay: 0ms;
+    }
+    &.fade-enter,
+    &.fade-leave-to {
+      opacity: 0;
+    }
   }
 
   & > .sidebar-content {

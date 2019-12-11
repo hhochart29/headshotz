@@ -15,5 +15,20 @@ export default {
       }
     ],
     image: csgoHeader
+  },
+  profile: {
+    menuItems: [
+      {
+        to: 'csgo-stats',
+        name: 'QWEQWRQWQWe',
+        icon: 'bar-chart'
+      },
+      {
+        to: 'csgo-challenge',
+        name: 'llululululul',
+        icon: 'cup'
+      }
+    ]
+    // image: csgoHeader
   }
 }
